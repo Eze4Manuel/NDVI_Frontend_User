@@ -25,7 +25,7 @@ const CHART_DATA = [
   }
 ];
 
-export default function AppWebsiteVisits() {
+export default function ImageViewChart() {
   const chartOptions = merge(BaseOptionChart(), {
     stroke: { width: [0, 2, 3] },
     plotOptions: { bar: { columnWidth: '11%', borderRadius: 4 } },
@@ -60,7 +60,7 @@ export default function AppWebsiteVisits() {
 
   return (
     <Card>
-      <CardHeader title="Website Visits" subheader="(+43%) than last year" />
+      <CardHeader title="NDVI View Chart" subheader="(+43%) than last month" />
       <Box sx={{ p: 3, pb: 1 }} dir="ltr">
         <ReactApexChart type="line" series={CHART_DATA} options={chartOptions} height={364} />
       </Box>

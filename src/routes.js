@@ -1,31 +1,48 @@
+import React from 'react';
 import { Navigate, useRoutes } from 'react-router-dom';
 // layouts
 import DashboardLayout from './layouts/dashboard';
 import LogoOnlyLayout from './layouts/LogoOnlyLayout';
-//
+import Helpers from './core/func/Helpers';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DashboardApp from './pages/DashboardApp';
-import Products from './pages/Products';
-import Blog from './pages/Blog';
-import User from './pages/User';
+import SampleNDVI from './pages/SampleNDVI';
+import NDVIindex from './pages/NDVIindex';
 import NotFound from './pages/Page404';
+import { useAuth } from './core/hooks/useAuth';
+
+import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  return useRoutes([
+  const { user, token } = useAuth();
+  Helpers.loadUserInStore(user);
+  return useRoutes( user !== null && user?.refresh_token !== '' ? [
     {
       path: '/dashboard',
       element: <DashboardLayout />,
       children: [
         { element: <Navigate to="/dashboard/app" replace /> },
         { path: 'app', element: <DashboardApp /> },
-        { path: 'user', element: <User /> },
-        { path: 'products', element: <Products /> },
-        { path: 'blog', element: <Blog /> }
+        { path: 'ndviindex', element: <NDVIindex /> },
+        { path: 'samplendvi', element: <SampleNDVI /> }
       ]
     },
+    {
+      path: '/',
+      element: <LogoOnlyLayout />,
+      children: [
+        { path: 'login', element:  <Navigate to="/dashboard/app" replace /> },
+        { path: 'register', element:  <Navigate to="/dashboard/app" replace />  },
+        { path: '404', element: <NotFound /> },
+        { path: '/', element: <Navigate to="/dashboard" /> },
+        { path: '*', element: <Navigate to="/404" /> }
+      ]
+    },
+  ]: 
+  [
     {
       path: '/',
       element: <LogoOnlyLayout />,
@@ -33,10 +50,12 @@ export default function Router() {
         { path: 'login', element: <Login /> },
         { path: 'register', element: <Register /> },
         { path: '404', element: <NotFound /> },
-        { path: '/', element: <Navigate to="/dashboard" /> },
-        { path: '*', element: <Navigate to="/404" /> }
+        { path: '/', element: <Navigate to="/login" /> },
+        { path: '*', element: <Navigate to="/login" /> }
       ]
-    },
-    { path: '*', element: <Navigate to="/404" replace /> }
-  ]);
+    }
+   ]
+  );
+
+  
 }

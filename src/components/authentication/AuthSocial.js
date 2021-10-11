@@ -18,10 +18,6 @@ export default function AuthSocial() {
         <Button fullWidth size="large" color="inherit" variant="outlined">
           <Icon icon={facebookFill} color="#1877F2" height={24} />
         </Button>
-
-        <Button fullWidth size="large" color="inherit" variant="outlined">
-          <Icon icon={twitterFill} color="#1C9CEA" height={24} />
-        </Button>
       </Stack>
 
       <Divider sx={{ my: 3 }}>

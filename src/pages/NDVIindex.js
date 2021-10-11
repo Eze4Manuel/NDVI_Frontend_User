@@ -1,7 +1,7 @@
+import React, { useState } from 'react';
 import { filter } from 'lodash';
 import { Icon } from '@iconify/react';
 import { sentenceCase } from 'change-case';
-import { useState } from 'react';
 import plusFill from '@iconify/icons-eva/plus-fill';
 import { Link as RouterLink } from 'react-router-dom';
 // material
@@ -29,6 +29,8 @@ import { UserListHead, UserListToolbar, UserMoreMenu } from '../components/_dash
 //
 import USERLIST from '../_mocks_/user';
 
+
+import GenerateNDVI from './NDVIindex/GenerateNDVI';
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -78,6 +80,9 @@ export default function User() {
   const [orderBy, setOrderBy] = useState('name');
   const [filterName, setFilterName] = useState('');
   const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [opened, setOpened] = useState(false);
+
+
 
   const handleRequestSort = (event, property) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -132,20 +137,22 @@ export default function User() {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="User | Minimal-UI">
+    <Page title="NDVI Index - Dashboard">
       <Container>
         <Stack direction="row" alignItems="center" justifyContent="space-between" mb={5}>
           <Typography variant="h4" gutterBottom>
-            User
+            NDVI Index
           </Typography>
           <Button
             variant="contained"
             component={RouterLink}
             to="#"
             startIcon={<Icon icon={plusFill} />}
+            onClick={() => setOpened(true)}
           >
-            New User
+            Generate New NDVI
           </Button>
+          
         </Stack>
 
         <Card>
@@ -154,7 +161,7 @@ export default function User() {
             filterName={filterName}
             onFilterName={handleFilterByName}
           />
-
+          
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
@@ -243,6 +250,9 @@ export default function User() {
             onPageChange={handleChangePage}
             onRowsPerPageChange={handleChangeRowsPerPage}
           />
+         
+         <GenerateNDVI opened={opened} setOpened={setOpened}/> 
+
         </Card>
       </Container>
     </Page>

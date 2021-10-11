@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Icon } from '@iconify/react';
 import menu2Fill from '@iconify/icons-eva/menu-2-fill';
@@ -11,6 +12,10 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
+import lib from '../../pages/lib';
+import { useAuth } from '../../core/hooks/useAuth';
+import { useNotifications } from '@mantine/notifications';
+
 
 // ----------------------------------------------------------------------
 
@@ -43,6 +48,17 @@ DashboardNavbar.propTypes = {
 };
 
 export default function DashboardNavbar({ onOpenSidebar }) {
+  const [ profile, setProfile ] = useState({});
+  const notify = useNotifications();
+  const { user } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      let reqData = await lib.fetchUserProfile(user?.refresh_token);
+      setProfile(reqData);
+    })();
+   },[user])
+
   return (
     <RootStyle>
       <ToolbarStyle>
@@ -58,7 +74,7 @@ export default function DashboardNavbar({ onOpenSidebar }) {
         <Stack direction="row" alignItems="center" spacing={{ xs: 0.5, sm: 1.5 }}>
           <LanguagePopover />
           <NotificationsPopover />
-          <AccountPopover />
+          <AccountPopover profile = {profile} />
         </Stack>
       </ToolbarStyle>
     </RootStyle>

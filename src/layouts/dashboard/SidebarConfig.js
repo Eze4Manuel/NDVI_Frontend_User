@@ -18,35 +18,16 @@ const sidebarConfig = [
     icon: getIcon(pieChart2Fill)
   },
   {
-    title: 'user',
-    path: '/dashboard/user',
-    icon: getIcon(peopleFill)
-  },
-  {
-    title: 'product',
-    path: '/dashboard/products',
+    title: 'ndvi index',
+    path: '/dashboard/ndviindex',
     icon: getIcon(shoppingBagFill)
   },
   {
-    title: 'blog',
-    path: '/dashboard/blog',
+    title: 'sample ndvi',
+    path: '/dashboard/samplendvi',
     icon: getIcon(fileTextFill)
   },
-  {
-    title: 'login',
-    path: '/login',
-    icon: getIcon(lockFill)
-  },
-  {
-    title: 'register',
-    path: '/register',
-    icon: getIcon(personAddFill)
-  },
-  {
-    title: 'Not found',
-    path: '/404',
-    icon: getIcon(alertTriangleFill)
-  }
+  
 ];
 
 export default sidebarConfig;

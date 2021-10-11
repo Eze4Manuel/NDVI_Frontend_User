@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import windowsFilled from '@iconify/icons-ant-design/windows-filled';
+import windowsFilled from '@iconify/icons-ant-design/radius-setting-outline';
 // material
 import { alpha, styled } from '@mui/material/styles';
 import { Card, Typography } from '@mui/material';
@@ -34,9 +34,9 @@ const IconWrapperStyle = styled('div')(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-const TOTAL = 1723315;
+const TOTAL = 17.33;
 
-export default function AppItemOrders() {
+export default function ADI() {
   return (
     <RootStyle>
       <IconWrapperStyle>
@@ -44,7 +44,7 @@ export default function AppItemOrders() {
       </IconWrapperStyle>
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Item Orders
+        Average Differential Index
       </Typography>
     </RootStyle>
   );
