@@ -4,7 +4,6 @@ import { Icon } from '@iconify/react';
 import { useFormik, Form, FormikProvider } from 'formik';
 import eyeFill from '@iconify/icons-eva/eye-fill';
 import eyeOffFill from '@iconify/icons-eva/eye-off-fill';
-import { useNavigate } from 'react-router-dom';
 // material
 import { Stack, TextField, IconButton, InputAdornment } from '@mui/material';
 import { LoadingButton } from '@mui/lab';
@@ -12,15 +11,12 @@ import { LoadingButton } from '@mui/lab';
 
 import Helpers from '../../../core/func/Helpers';
 import { useNotifications } from '@mantine/notifications';
-import { useAuth } from '../../../core/hooks/useAuth';
 import lib from '../lib';
 
 // ----------------------------------------------------------------------
 
 export default function RegisterForm() {
-  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
-  const { set } = useAuth();
   const notify = useNotifications();
 
   const RegisterSchema = Yup.object().shape({
@@ -65,7 +61,6 @@ export default function RegisterForm() {
       if(reqData.status === 'error'){
         Helpers.alert({ notifications: notify, icon: 'success', color: 'red', message: reqData.msg })
       }
-      console.log(reqData);
     }
   });
 

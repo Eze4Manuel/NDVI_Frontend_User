@@ -14,7 +14,6 @@ import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
 import lib from '../../pages/lib';
 import { useAuth } from '../../core/hooks/useAuth';
-import { useNotifications } from '@mantine/notifications';
 
 
 // ----------------------------------------------------------------------
@@ -49,7 +48,6 @@ DashboardNavbar.propTypes = {
 
 export default function DashboardNavbar({ onOpenSidebar }) {
   const [ profile, setProfile ] = useState({});
-  const notify = useNotifications();
   const { user } = useAuth();
 
   useEffect(() => {

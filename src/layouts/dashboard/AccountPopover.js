@@ -1,8 +1,6 @@
 import { Icon } from '@iconify/react';
 import { useRef, useState } from 'react';
 import homeFill from '@iconify/icons-eva/home-fill';
-import personFill from '@iconify/icons-eva/person-fill';
-import settings2Fill from '@iconify/icons-eva/settings-2-fill';
 import { Link as RouterLink } from 'react-router-dom';
 // material
 import { alpha } from '@mui/material/styles';
@@ -17,7 +15,6 @@ import Helpers from '../../core/func/Helpers';
 import { useNotifications } from '@mantine/notifications';
 import { useAuth } from '../../core/hooks/useAuth';
 import lib from '../../components/authentication/lib';
-import { unset } from 'lodash';
 import { LoadingOverlay } from '@mantine/core';
 
 // ----------------------------------------------------------------------
@@ -61,7 +58,7 @@ export default function AccountPopover({profile}) {
     setVisible(true);
     (async () => {
       let reqData = await lib.logOutUser(user?.refresh_token)
-      if (reqData.status == 200) {
+      if (reqData.status === 200) {
         Helpers.alert({ notifications: notify, icon: 'success', color: 'green', message: reqData?.msg })
        
       }
@@ -70,7 +67,6 @@ export default function AccountPopover({profile}) {
         unset();
         navigate('/login', { replace: true });
       }
-      console.log(reqData);
     })()
     setVisible(false);
   }

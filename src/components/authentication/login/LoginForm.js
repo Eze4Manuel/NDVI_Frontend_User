@@ -44,7 +44,7 @@ export default function LoginForm() {
     validationSchema: LoginSchema,
     onSubmit: async () => {
       let reqData = await lib.loginUser(values);
-      if(reqData?.status == 200){
+      if(reqData?.status === 200){
           Helpers.loadUserInStore(reqData?.data);
           set(reqData?.data);
           Helpers.alert({ notifications: notify, icon: 'success', color: 'green', message: 'Login Success' })

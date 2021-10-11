@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {  } from "react";
 import './GenerateNDVI.css';
-import { Modal, Button as MantineButton, Group } from '@mantine/core';
+import { Modal } from '@mantine/core';
 import { useForm } from '@mantine/hooks';
 import { TextInput, Button } from '@mantine/core';
 import { LoadingOverlay } from '@mantine/core';

@@ -1,10 +1,5 @@
 // material
 import { Box, Grid, Container, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { useAuth } from '../core/hooks/useAuth';
-import { useNotifications } from '@mantine/notifications';
-import Helpers from '../core/func/Helpers';
-import lib from './lib';
 
 // components
 import Page from '../components/Page';
@@ -21,10 +16,6 @@ import {
 // ----------------------------------------------------------------------
 
 export default function DashboardApp() {
-  const { user } = useAuth();
-  const notify = useNotifications();
- 
-
   return (
     <Page title="Dashboard | NDVI User">
       <Container maxWidth="xl">

@@ -12,12 +12,11 @@ import NDVIindex from './pages/NDVIindex';
 import NotFound from './pages/Page404';
 import { useAuth } from './core/hooks/useAuth';
 
-import { useState } from 'react';
 
 // ----------------------------------------------------------------------
 
 export default function Router() {
-  const { user, token } = useAuth();
+  const { user } = useAuth();
   Helpers.loadUserInStore(user);
   return useRoutes( user !== null && user?.refresh_token !== '' ? [
     {
@@ -41,6 +40,7 @@ export default function Router() {
         { path: '*', element: <Navigate to="/404" /> }
       ]
     },
+    { path: '*', element: <Navigate to="/dashboard" replace /> }
   ]: 
   [
     {
@@ -53,7 +53,8 @@ export default function Router() {
         { path: '/', element: <Navigate to="/login" /> },
         { path: '*', element: <Navigate to="/login" /> }
       ]
-    }
+    },
+    { path: '*', element: <Navigate to="/login" replace /> }
    ]
   );
 
