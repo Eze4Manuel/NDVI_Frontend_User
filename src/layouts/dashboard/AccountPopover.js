@@ -59,16 +59,20 @@ export default function AccountPopover({profile}) {
     (async () => {
       let reqData = await lib.logOutUser(user?.refresh_token)
       if (reqData.status === 200) {
-        Helpers.alert({ notifications: notify, icon: 'success', color: 'green', message: reqData?.msg })
-       
-      }
-      if (reqData.status === 'error') {
-        Helpers.alert({ notifications: notify, icon: 'error', color: 'red', message: reqData?.msg });
+        Helpers.alert({ notifications: notify, icon: 'success', color: 'green', message: reqData?.statusText })
         unset();
         navigate('/login', { replace: true });
       }
+      if (reqData.status === 'error') {
+        Helpers.alert({ notifications: notify, icon: 'error', color: 'red', message: reqData?.msg });
+        if(reqData.msg === 'Token has been revoked') {
+          unset();
+        navigate('/login', { replace: true });
+        }
+      }
+      setVisible(false);
+
     })()
-    setVisible(false);
   }
 
   return (
@@ -105,10 +109,10 @@ export default function AccountPopover({profile}) {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {profile.first_name + ' '+ profile.last_name}
+            {profile?.first_name + ' '+ profile?.last_name}
           </Typography>
           <Typography variant="body2" sx={{ color: 'text.secondary' }} noWrap>
-            {profile.email}
+            {profile?.email}
           </Typography>
         </Box>
 

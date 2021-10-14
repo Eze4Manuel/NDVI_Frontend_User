@@ -18,6 +18,7 @@ import { useAuth } from './core/hooks/useAuth';
 export default function Router() {
   const { user } = useAuth();
   Helpers.loadUserInStore(user);
+  console.log(user);
   return useRoutes( user !== null && user?.refresh_token !== '' ? [
     {
       path: '/dashboard',

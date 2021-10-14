@@ -1,10 +1,14 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 // material
 import { styled } from '@mui/material/styles';
 //
 import DashboardNavbar from './DashboardNavbar';
 import DashboardSidebar from './DashboardSidebar';
+
+
+import lib from '../../pages/lib';
+import { useAuth } from '../../core/hooks/useAuth';
 
 // ----------------------------------------------------------------------
 
@@ -35,10 +39,20 @@ const MainStyle = styled('div')(({ theme }) => ({
 export default function DashboardLayout() {
   const [open, setOpen] = useState(false);
 
+  const [ profile, setProfile ] = useState({});
+  const { user } = useAuth();
+
+  useEffect(() => {
+    (async () => {
+      let reqData = await lib.fetchUserProfile(user?.refresh_token);
+      setProfile(reqData);
+    })();
+   },[user, profile])
+
   return (
     <RootStyle>
-      <DashboardNavbar onOpenSidebar={() => setOpen(true)} />
-      <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} />
+      <DashboardNavbar onOpenSidebar={() => setOpen(true)} profile={profile}/>
+      <DashboardSidebar isOpenSidebar={open} onCloseSidebar={() => setOpen(false)} profile={profile} />
       <MainStyle>
         <Outlet />
       </MainStyle>

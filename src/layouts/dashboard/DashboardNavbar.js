@@ -12,9 +12,6 @@ import Searchbar from './Searchbar';
 import AccountPopover from './AccountPopover';
 import LanguagePopover from './LanguagePopover';
 import NotificationsPopover from './NotificationsPopover';
-import lib from '../../pages/lib';
-import { useAuth } from '../../core/hooks/useAuth';
-
 
 // ----------------------------------------------------------------------
 
@@ -46,17 +43,7 @@ DashboardNavbar.propTypes = {
   onOpenSidebar: PropTypes.func
 };
 
-export default function DashboardNavbar({ onOpenSidebar }) {
-  const [ profile, setProfile ] = useState({});
-  const { user } = useAuth();
-
-  useEffect(() => {
-    (async () => {
-      let reqData = await lib.fetchUserProfile(user?.refresh_token);
-      setProfile(reqData);
-    })();
-   },[user])
-
+export default function DashboardNavbar({ onOpenSidebar, profile }) {
   return (
     <RootStyle>
       <ToolbarStyle>
